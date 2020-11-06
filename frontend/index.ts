@@ -20,6 +20,11 @@ const routes = [
 			action: async () => { await import ('./views/helloworld/hello-world-view'); }
 		},
 		{
+			path: 'daterange',
+			component: 'daterange-view', 
+			action: async () => { await import ('./views/daterange/daterange-view'); }
+		},
+		{
 			path: 'hello',
 			component: 'hello-world-view', 
 			action: async () => { await import ('./views/helloworld/hello-world-view'); }
