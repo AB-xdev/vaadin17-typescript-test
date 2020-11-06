@@ -31,10 +31,8 @@ jobs:
       
     - name: Deploy to heroku
       run: |
-        heroku login
         heroku plugins:install java
         heroku deploy:jar target/vaadin17-typescript-test-${{ steps.version.outputs.version }}.jar --app ${{ secrets.HEROKU_APP_NAME }}
-        heroku logout
       env: 
         HEROKU_API_KEY: ${{secrets.HEROKU_API_KEY}}
 
