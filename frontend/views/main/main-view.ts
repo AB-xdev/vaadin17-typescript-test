@@ -21,6 +21,7 @@ export class MainView extends LitElement {
   @property({ type: Array }) menuTabs: MenuTab[] = [
     {route: 'daterange', name: 'Daterange-Demo'},
     {route: 'hello', name: 'Hello World'},
+    {route: 'server-view', name: 'Server View'},
     {route: 'about', name: 'About'},
   ];
 
@@ -50,10 +51,14 @@ export class MainView extends LitElement {
           margin: 0;
         }
 
+        header .theme-button {
+          margin-left: auto;
+        }
+
         header img {
           border-radius: 50%;
           height: var(--lumo-size-s);
-          margin-left: auto;
+          margin-left: var(--lumo-space-m);
           margin-right: var(--lumo-space-m);
           overflow: hidden;
           background-color: var(--lumo-contrast);
@@ -106,11 +111,24 @@ export class MainView extends LitElement {
   }
 
   render() {
+    let isDarkMode: boolean = this.isDarkMode();
+
     return html`
       <vaadin-app-layout primary-section="drawer">
-        <header slot="navbar" theme="dark">
+        <header slot="navbar" theme="dark" style="${isDarkMode ? "background-color: var(--lumo-shade-50pct)" : ""}">
           <vaadin-drawer-toggle></vaadin-drawer-toggle>
           <h1>${this.getSelectedTabName(this.menuTabs)}</h1>
+          <vaadin-button
+            class="theme-button"
+            @click="${this.toggleTheme}"
+          >
+            <iron-icon 
+              slot="prefix" 
+              icon=${isDarkMode ? "vaadin:sun-o" : "vaadin:moon-o"}
+            >
+            </iron-icon>
+            ${isDarkMode ? "Light mode" : "Dark mode" }
+          </vaadin-button>
           <img src="images/user.svg" alt="Avatar" />
         </header>
 
@@ -151,6 +169,10 @@ export class MainView extends LitElement {
     window.removeEventListener('vaadin-router-location-changed', this._routerLocationChanged);
   }
 
+  firstUpdated() {
+    this.setDarkMode(this.isDarkMode());
+  }
+
   private isCurrentLocation(route: string): boolean {
     return router.urlForPath(route) === this.location.getUrl();
   }
@@ -174,5 +196,20 @@ export class MainView extends LitElement {
     }
 
     return tabName;
+  }
+
+  isDarkMode() : boolean {
+    return localStorage?.getItem("darkmode") == "1";
+  }
+
+  setDarkMode(dark: boolean) {
+    document.getElementsByTagName("body")[0].setAttribute("theme", dark ? "dark" : "light");
+    localStorage?.setItem("darkmode", dark ? "1" : "0");
+  }
+
+  toggleTheme() {
+    this.setDarkMode(!this.isDarkMode());
+
+    this.requestUpdate();
   }
 }

@@ -98,6 +98,12 @@
 			<artifactId>a-vaadin-helper</artifactId>
 			<version>1.5.0</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>com.xdev-software</groupId>
+			<artifactId>vaadin-date-range-picker</artifactId>
+			<version>1.0.2</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
