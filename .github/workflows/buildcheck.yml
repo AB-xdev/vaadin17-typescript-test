@@ -3,7 +3,7 @@ name: Check Build
 on:
   workflow_dispatch:
   push:
-    branches: [ master ]
+    branches: [ develop ]
   pull_request:
 
 jobs:
