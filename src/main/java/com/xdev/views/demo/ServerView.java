@@ -7,6 +7,7 @@ import java.util.List;
 import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.HasSize;
 import com.vaadin.flow.component.dependency.CssImport;
+import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextArea;
 import com.vaadin.flow.router.PageTitle;
@@ -45,7 +46,9 @@ public class ServerView extends Composite<VerticalLayout>
 		this.taResult.setSizeFull();
 		
 		this.getContent().setPadding(false);
-		this.getContent().add(new VerticalLayout(this.dateRangePicker), new VerticalLayout(this.taResult));
+		this.getContent().add(
+			new VerticalLayout(new Label("This view is built with Vaadin Flow on java"), this.dateRangePicker),
+			new VerticalLayout(this.taResult));
 		this.getContent().getChildren().forEach(comp -> ((HasSize)comp).setHeight("50%"));
 		this.getContent().setHeightFull();
 		

@@ -16,18 +16,13 @@ const routes = [
 	children: [
 		{
 			path: '',
-			component: 'daterange-view', 
-			action: async () => { await import ('./views/daterange/daterange-view'); }
+			component: 'welcome-view', 
+			action: async () => { await import ('./views/welcome/welcome-view'); }
 		},
 		{
 			path: 'daterange',
 			component: 'daterange-view', 
 			action: async () => { await import ('./views/daterange/daterange-view'); }
-		},
-		{
-			path: 'hello',
-			component: 'hello-world-view', 
-			action: async () => { await import ('./views/helloworld/hello-world-view'); }
 		},
 		{
 			path: 'about',

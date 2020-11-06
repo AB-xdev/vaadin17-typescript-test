@@ -19,8 +19,8 @@ export class MainView extends LitElement {
   @property({ type: Object }) location = router.location;
 
   @property({ type: Array }) menuTabs: MenuTab[] = [
+    {route: '', name: 'Home'},
     {route: 'daterange', name: 'Daterange-Demo'},
-    {route: 'hello', name: 'Hello World'},
     {route: 'server-view', name: 'Server View'},
     {route: 'about', name: 'About'},
   ];
@@ -53,6 +53,7 @@ export class MainView extends LitElement {
 
         header .theme-button {
           margin-left: auto;
+          cursor: pointer;
         }
 
         header img {
@@ -161,7 +162,7 @@ export class MainView extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     window.addEventListener('vaadin-router-location-changed', this._routerLocationChanged);
-    this.projectName = 'vaadin17-typescript-test';
+    this.projectName = 'V17-TS-Demo';
   }
 
   disconnectedCallback() {
@@ -169,7 +170,9 @@ export class MainView extends LitElement {
     window.removeEventListener('vaadin-router-location-changed', this._routerLocationChanged);
   }
 
-  firstUpdated() {
+  async firstUpdated(changedProperties: any) {
+    super.firstUpdated(changedProperties);
+
     this.setDarkMode(this.isDarkMode());
   }
 
